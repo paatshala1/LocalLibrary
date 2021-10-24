@@ -1,0 +1,78 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+
+/***** De acá hacia arriba indica que debe ser sustituido *****/
+
+header, main, footer {
+  padding-left: 0px;
+}
+
+.buttons{
+  display: flex;
+}
+
+.cleanList {
+  list-style: none;
+}
+
+#delButton {
+  visibility: hidden;
+}
+
+.detailedList {
+  margin-left: 20px;
+  margin-top: 20px;
+  max-width: 80%;
+}
+
+.flexCont {
+  display: flex;
+}
+
+.genre, .status {
+  padding-right: 1rem;
+}
+
+.sidebar-nav {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.test {
+  display: flex;
+  align-items: center;
+}
+
+.itemList {
+  flex-grow: 1;
+}
+
+
+
+
+
+
+
+@media only screen and (min-width : 992px) {
+  header, main, footer {
+    padding-left: 150px;
+    overflow-x: hidden;
+  }
+  
+  /* main {
+    background-image: url(https://images.pexels.com/photos/1560093/pexels-photo-1560093.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+    background-repeat: no-repeat;
+    background-size: cover;
+  } */
+
+  .sidenav-close {
+    visibility: hidden;
+  }
+}

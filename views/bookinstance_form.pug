@@ -1,0 +1,64 @@
+extends layout 
+
+block content 
+
+  h1 #{title}
+
+  form(action="", method="POST") 
+    .input-field Libro
+      select#book.browser-default(name="book")
+        option(value="" disabled=true, selected=true) 
+        if books.length > 1
+          - books.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})
+          for b in books 
+            option(value=b._id, selected=b.selected) #{b.title}
+        else 
+          option(value=books._id, selected=true) #{books.title} 
+
+    .input-field 
+      if instance === undefined
+        input#imprint(type="text", name="imprint")
+      else 
+        p#dateControl(hidden) #{instance.due_back}
+        input#imprint(type="text", name="imprint", value=instance.imprint)
+      label(for="imprint") Edición
+
+    .input-field 
+      if instance === undefined
+        input#date.datepicker(type="text", name="date")
+        label(for="date") Disponible el #[i (mañana, si se omite)]
+      else 
+        input#date.datepicker(type="text", name="date")
+        label(for="date") Disponible el #[i (mañana, si se omite)]
+
+
+    //- .input-field 
+    //-   input(type="text", name="", value=(instance === undefined ? '' : instance.due_back))
+
+    label Estatus
+    br
+
+    if instance === undefined 
+      for s in status 
+        label.status
+          input.with-gap(type="radio", name="status", value=s)
+          span #{s}
+    else 
+      for s in status 
+        label.status
+          input.with-gap(type="radio", name="status", value=s, checked=(s == instance.status ? true : false))
+          span #{s}
+
+    .input-field
+      button.btn.waves-effect-waves-light(type="submit") Guardar 
+        i.material-icons.right cloud
+
+  if errors 
+    ul
+      for e in errors
+        li.red-text #{e.param}: #{e.msg}
+
+
+
+  script(src="/javascripts/select.js") 
+  script(src="/javascripts/dateDefault.js") 

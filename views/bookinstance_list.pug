@@ -1,0 +1,22 @@
+extends layout 
+
+block content 
+
+    h1= title 
+
+    ul 
+        - instance_list.sort((a, b)=>{let textA = a.book.title.toUpperCase(); let textB = b.book.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+        each instance in instance_list 
+        
+            li #[a(href=instance.url) #{instance.book.title}]. Edición:  #{instance.imprint}
+            if instance.status == 'Available'
+                span.green-text #[b #{instance.status}].
+            else if instance.status == 'Maintenance'
+                span.orange-text #[b #{instance.status}].
+            else 
+                span.red-text #[b #{instance.status}].
+            
+            if instance.status != 'Available'
+                span &nbsp&nbspAvailable at: #{instance.due_back_formatted}
+        else 
+            li No hay ejemplares disponibles

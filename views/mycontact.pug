@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Contact page
+
+        include ./partials/head
+    body 
+
+block content
+    body
+        nav 
+            include ./partials/navigation 
+        .container.p-5
+            .row 
+                .col-md-4.offset-md-4 
+                    .card 
+                        .card-header.bg-dark.text-white.text-center 
+                            h3 Contact Me 
+                        .card-body 
+                            form(action="") 
+                                .form-group 
+                                    input(type="text", class="form-control", placeholder="email")
+                                .form-group 
+                                    textarea(name="", cols="30", rows="10", class="form-control", placeholder="message") 
+                                .form-group 
+                                    button.btn.btn-primary.btn-block Send Message 
+    include ./partials/footer

@@ -1,0 +1,39 @@
+extends layout 
+
+block content 
+
+  h1 Title: #{book.title}
+
+  p #[strong Autor:] #[a(href=book.author.url) #{book.author.name}]
+  p #[strong Sinopsis:] #{book.summary}
+  p #[strong ISBN:] #{book.isbn}
+
+  //-
+      Ojo aquí porque hay dos temas: 1) Varios géneros y 2) un espacio luego de la coma que es parte del texto
+  p #[strong Género: ]
+    each valor, clave in book.genre
+      a(href=valor.url) #{valor.name}
+      if clave < book.genre.length -1
+        |, 
+
+  div.detailedList
+    h4 Copias 
+
+    each i in instances 
+      hr
+      if i.status == 'Available'
+        p.green-text #{i.status}
+      else if i.status == 'Maintenance'
+        p.red-text #{i.status}
+      else
+        p.orange-text #{i.status}
+      p #[strong Editorial: ] #{i.imprint}
+      p #[strong id: ] #[a(href=i.url) #{i._id}]
+
+  hr
+  .buttons
+    p 
+      a.btn-flat.green-text(href=book.url+'/update') Modificar libro
+
+    p 
+      a.btn-flat.red-text(href=book.url+'/delete') Eliminar libro

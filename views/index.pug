@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 #{title}
+  p Bienvenido a #[b #[i Local Libray]], un sitio web básico diseñado con Nodejs y Express
+
+  h2 Existencias dinámicas:
+
+  if error 
+    p Error obteniendo datos desde la base de datos
+  
+  else 
+    p La librería tiene las siguientes cantidades: 
+
+    ul
+      li #[strong Libros:] #{data.book_count}
+      li #[strong Copias:] #{data.book_instance_count}
+      li #[strong Copias disponibles:] #{data.book_instance_avaible_count}
+      li #[strong Autores:] #{data.author_count}
+      li #[strong Géneros:] #{data.genre_count}
+

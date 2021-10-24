@@ -1,0 +1,76 @@
+doctype html
+html(lang='es')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= title
+
+    <!--Import Google Icon Font-->
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    
+    <!-- Compiled and minified CSS -->
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css")
+            
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+
+    .row
+      .col.s2
+        ul.sidenav.sidenav-fixed#slide-out
+          li
+            .user-view
+              .background
+                img(src="https://images.pexels.com/photos/1560093/pexels-photo-1560093.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", alt='library')
+              a.sidenav-close(href="")
+                i.material-icons.right.white-text close
+              a(href="")
+              img.circle(src="/images/tulipanes.webp", alt='tulipanes')
+              a(href="#name")
+                span.white-text.name Hugo
+              a(href="#email")
+                span.white-text.email herm@me.com
+          li
+            a(href='/catalog') Inicio
+          li
+            .divider
+          li
+            a.subheader Consultas
+          li
+            a(href='/catalog/books') Libros
+          li
+            a(href='/catalog/authors') Autores
+          li
+            a(href='/catalog/genres') Generos
+          li
+            a(href='/catalog/bookinstances') Ejemplares
+          li
+
+          li
+            .divider
+          li
+            a.subheader Creación
+          li
+            a(href='/catalog/author/create') Crear nuevo autor
+          li
+            a(href='/catalog/genre/create') Crear nuevo genero
+          li
+            a(href='/catalog/book/create') Crear nuevo libro
+          li
+            a(href='/catalog/bookinstance/create') Crear nuevo ejemplar
+        
+        a.sidenav-trigger(href="" data-target="slide-out")
+          i.material-icons menu
+
+      .col.s10
+        main.main-content
+          block content
+
+          .empty  
+            block notes
+
+    //- script(src="/javascripts/select.js") 
+
+<!-- Compiled and minified JavaScript -->
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js")
+    script(src="/javascripts/nav.js") 
+

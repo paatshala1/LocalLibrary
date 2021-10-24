@@ -1,0 +1,40 @@
+extends layout 
+
+block content 
+
+  h1 #{title}
+  label(for="") Author 
+  p #{book.author.name} ( #{book.author.lifespan} )
+  br
+  label Resumen 
+  p #{book.summary}
+
+
+  if instances.length > 0
+    h2 Ejemplares 
+    p.red-text #[b Eliminar los ejemplares es parte del borrado del libro,]
+    p.red-text #[b si desea continuar seleccione manualmente todos los  ejemplares.]
+    hr
+    .row#bookList
+      for i in instances  
+        .col.s1 
+          label(for=i._id)
+            input.eachBook(type="checkbox", name="title", value=i._id, id=i._id)
+            span &nbsp
+          a(href=i.url) #{i.title}
+        .col.s11
+          p Ejemplar: #{i._id}
+          if i.status == 'Available'
+            p.green-text #{i.status}. #[b #{i.due_back_formatted}]
+          else if i.status == 'Maintenance'
+            p.red-text #{i.status}. #[b #{i.due_back_formatted}]
+          else
+            p.orange-text #{i.status}. #[b #{i.due_back_formatted}]
+
+  form(action="", method="POST") 
+    input#bookid(type="text", name="bookid", required, value=book._id, hidden)
+    button.btn.waves-effect.waves-light.red#delButton(type="submit") Eliminar
+      i.material-icons.right delete_forever
+
+  script(src="/javascripts/checked.js") 
+

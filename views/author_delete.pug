@@ -1,0 +1,38 @@
+extends layout 
+
+block content 
+
+  h1 #{title} #{author.name}
+  p #{author.lifespan}
+  
+  .divider
+  
+  if books.length > 0
+    p.red-text #[b Eliminar sus libros es parte del borrado del autor,]
+    p.red-text #[b si desea continuar seleccione manualmente todos los libros.]
+  
+    .divider 
+  
+    dl.row#bookList
+      for b in books 
+        dt.col.s12
+          label(for=b._id)
+            input.col.s1.eachBook(type="checkbox", name="title", value=b._id, id=b._id)
+            span &nbsp
+          a(href=b.url) #{b.title} 
+        dd  &nbsp&nbsp&nbsp#{b.summary}
+
+    form(action="", method="POST") 
+      input#authorid(type="text", name="authorid", required, value=author._id, hidden)
+      button.btn.waves-effect.waves-light.red#delButton(type="submit") Eliminar
+        i.material-icons.right delete_forever
+
+  else 
+    h5 Está seguro que desea eliminar este autor.
+
+    form(action="", method="POST") 
+      input#authorid(type="text", name="authorid", required, value=author._id, hidden)
+      button.btn.waves-effect.waves-light.red#delButton(type="submit") Eliminar
+        i.material-icons.right delete_forever
+
+  script(src="/javascripts/checked.js") 

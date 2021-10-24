@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+
+  h1 #{title}
+
+  form(method='POST', action='')
+    .input-field
+      input#genreName(type='text', name='genreName', value=(undefined===genre ? '' : genre.name), required='true', autocomplete='off')
+      label(for='genreName') Género
+
+    button.btn.waves-effect.waves-light(type="submit") #{button.label}
+      i.material-icons.right #{button.icon}
+
+  if errors 
+    ul 
+      for error in errors 
+        li.red-text #{error.msg}

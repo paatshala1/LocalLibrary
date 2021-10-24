@@ -1,0 +1,34 @@
+extends layout 
+
+block content 
+
+	h1 ID: #{instance._id}
+
+	p #[strong Título: ] #[a(href=instance.book.url) #{instance.book.title}]
+	p #[strong Editorial: ] #{instance.imprint}
+
+	if instance.status == 'Available'
+		p #[strong Status: ] #[span.green-text #{instance.status}]
+	else if instance.status == 'Maintenance'
+		p #[strong Status: ] #[span.orange-text #{instance.status}]
+	else
+		p #[strong Status: ] #[span.red-text #{instance.status}]
+	p #[strong Disponible en: ] #{instance.due_back_formatted}
+
+	hr
+	.buttons
+		p 
+			a.btn-flat.green-text(href=instance.url+'/update') Modificar ejemplar
+
+		if instance.status == 'Available'
+			form(action="", method="POST") 
+				button.btn.waves-effect.waves-light.red(type="submit") Eliminar
+					i.material-icons.right delete_forever
+		else 
+			form(action="", method="POST") 
+				button.btn.waves-effect.waves-light.red.disabled(type="submit") Eliminar
+					i.material-icons.right delete_forever
+
+			//- button.red.white-text Ejemplar debe estar disponible para ser eliminado
+
+

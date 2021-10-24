@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+
+	h1= title 
+
+	ul 
+		each genre in genre_list 
+			li.test
+				a.itemList(href=genre.url) #{genre.name}
+				a.btn-flat.green-text(href=genre.url+'/update') Modificar
+				a.btn-flat.red-text(href=genre.url+'/delete') Eliminar
+
+		else 
+			li No existen géneros a mostrar

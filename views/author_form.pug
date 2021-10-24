@@ -1,0 +1,32 @@
+extends layout 
+
+block content 
+
+	h1 #{title}
+
+	div.detailedList
+		form(method='POST', action='')
+			label(for='first_name') Nombre: 
+			.flexCont
+				input#first_name(type="text", name='first_name', placeholder='Nombre', required='true', autocomplete='off', value=(undefined === author_req ? '' : author_req.first_name))
+				span.red-text *
+			label(for='family_name') Apellido: 
+			.flexCont
+				input#family_name(type="text", name='family_name', placeholder='Apellido', required='true', autocomplete='off', value=(undefined === author_req ? '' : author_req.family_name))
+				span.red-text *
+			label(for='birth') Nacimiento: 
+			input#birth(type="date", name='birth', value=(undefined === author_req ? '' : author_req.date_of_birth))
+			label(for='death') Muerte: 
+			input#death(type="date", name='death', value=(undefined === author_req ? '' : author_req.date_of_death))
+			button.btn.waves-effect.waves-light(type="submit") Crear
+				i.material-icons.right cloud
+
+	if errors 
+		ul 
+			for e in errors 
+				li.red-text #{e.param}: #{e.msg}
+
+
+block notes 
+	.empty
+		span.red-text *&nbsp&nbsp&nbsp #[i.black-text Campos obligatorios]

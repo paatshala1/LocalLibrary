@@ -1,0 +1,45 @@
+extends layout 
+
+block content 
+  h1 #{title} 
+
+  form(action="", method="POST") 
+    .input-field 
+      input#title(type="text", name="title", value=(book === undefined ? '' : book.title))
+      //- input#title(type="text", name="title", placeholder="algun nombre", value=(book === undefined ? '' : book.title))
+      label(for="title") Título
+
+    label.active(for="author") Autor
+    .input-field 
+      select#author.browser-default(type="select", placeholder="Seleccione un autor", name="author") 
+        option(value="" disabled=true, selected=true)
+        - authors.sort(function(a, b) {let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;})
+        for a in authors
+          if book 
+            option(value=a._id, selected=(a._id.toString() === book.author._id.toString() ? true : false)) #{a.name} 
+          else
+            option(value=a._id) #{a.name}
+    
+    label(for="summary") Sinópsis
+    textarea#summary(name="summary", cols="30", rows="10") #{book === undefined ? '' : book.summary}
+    
+    .input-field 
+      input#ISBN(type="text", name="isbn", value=(book === undefined ? '' : book.isbn))
+      label(for="ISBN") ISBN
+
+    label Género(s)
+    br 
+    for g in genres 
+      label.genre
+        input.with-gap(type="checkbox", name="genre", id=g._id, value=g._id, checked=g.checked)
+        span #{g.name}
+
+    .input-field
+      button.btn.waves-effect.waves-light(type="submit") #{button.label}
+        i.material-icons.right #{button.icon} 
+
+
+  if errors 
+    ul 
+      for e in errors 
+        li.red-text #{e.msg}

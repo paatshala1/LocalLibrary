@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+
+    h1 Género #{genre.name}
+
+    div(class="detailedList")
+
+        h4 Libros
+
+        dl 
+            each book in books
+                dt #[a(href=book.url) #{book.title}]
+                dd #{book.summary}
+            else 
+                p Aún no hay libros de este género
